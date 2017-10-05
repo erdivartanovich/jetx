@@ -36,12 +36,17 @@ var jetx = function() {
         var route = this.router.filter(route => (route.url === url && route.method === method));
         if(route && route.length>0) {
             console.log(`[${req.log.id}] `, "incoming request to url: ", route[0].url);
-            req.getBody((err, body)=>{
-                if(body){
-                    req.body = body;
-                }
+            if(['POST', 'PATCH', 'PUT'].includes(method)) {
+                // parse the body before trigger the route callback
+                req.getBody((err, body)=>{
+                    if(body){
+                        req.body = body;
+                    }
+                    route[0].callback(req, this.response(res));
+                });
+            } else {
                 route[0].callback(req, this.response(res));
-            });
+            }
         } else {
             this.send(res, this.page404);
         }
@@ -97,7 +102,6 @@ app.get('/test', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-    console.log(req.body);
     res('this is the post response');
 });
 
