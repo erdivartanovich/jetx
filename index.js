@@ -1,12 +1,12 @@
 var http = require('http');
+var textBody = require("body");
 var jsonBody = require("body/json");
-
-var logIdIterator = 0;
-var requestStorage = [];
+var formBody = require("body/form");
 
 // initialize our server class
 var jetx = function() {
-
+    var logIdIterator = 0;
+    
     this.server = http.createServer();
     this.server.on('request', (req) => {
         // request logger
@@ -14,17 +14,34 @@ var jetx = function() {
             id: ++logIdIterator
         }
         //read and store request body
-        req.getBody = function(cb){
-            var body = jsonBody(req, cb(err, body));
+        req.getBody = (cb) => {
+            textBody(req, (err, body)=>{
+                if(!body) {
+                    jsonBody(req, (err, body) => {
+                        if(!body) {
+                            formBody(req, cb)
+                        } else {
+                            cb(err, body);
+                        }
+                    });
+                } else {
+                    cb(err, body);
+                }
+            });
         }
-    })
+    });
     this.server.on('request', (req, res) => {
         var {url, method, headers } = req;
         //filter url from our router list
         var route = this.router.filter(route => (route.url === url && route.method === method));
         if(route && route.length>0) {
             console.log(`[${req.log.id}] `, "incoming request to url: ", route[0].url);
-            route[0].callback(req, this.response(res));
+            req.getBody((err, body)=>{
+                if(body){
+                    req.body = body;
+                }
+                route[0].callback(req, this.response(res));
+            });
         } else {
             this.send(res, this.page404);
         }
@@ -80,6 +97,7 @@ app.get('/test', function(req, res) {
 });
 
 app.post('/', function(req, res) {
+    console.log(req.body);
     res('this is the post response');
 });
 
