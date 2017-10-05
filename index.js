@@ -1,20 +1,45 @@
 var http = require('http');
+var jsonBody = require("body/json");
+
+var logIdIterator = 0;
+var requestStorage = [];
 
 // initialize our server class
 var jetx = function() {
-    this.server = http.createServer((req, res) => {
-        var url = req.url;
+
+    this.server = http.createServer();
+    this.server.on('request', (req) => {
+        // request logger
+        req.log = {
+            id: ++logIdIterator
+        }
+        //read and store request body
+        req.getBody = function(cb){
+            var body = jsonBody(req, cb(err, body));
+        }
+    })
+    this.server.on('request', (req, res) => {
+        var {url, method, headers } = req;
         //filter url from our router list
-        var route = this.router.filter(route => (route.url === url && route.method === req.method));
+        var route = this.router.filter(route => (route.url === url && route.method === method));
         if(route && route.length>0) {
-            console.log("incoming request to url: ", route[0].url);
+            console.log(`[${req.log.id}] `, "incoming request to url: ", route[0].url);
             route[0].callback(req, this.response(res));
         } else {
-            res.writeHead(404, {'Content-Type': 'text/html'});
-            res.write(this.page404);
-            res.end();
+            this.send(res, this.page404);
         }
+        
+        // add request error handler
+        req.on('error', (err) => {
+            console.error('error happened: ', err.stack);
+        });
     });
+}
+
+jetx.prototype.send = function(res, content) {
+    res.writeHead(404, {'Content-Type': 'text/html'});
+    res.write(content);
+    res.end();
 }
 
 jetx.prototype.router = [];
@@ -40,10 +65,9 @@ jetx.prototype.response = (res) =>
         res.end();
     }
 
-
 jetx.prototype.listen =  function(port) {
     this.server.listen(port);
-    console.log('JETX server running on ', this.server.address().port);
+    console.log('JETX server running on port: ', this.server.address().port);
 }
 
 const app = new jetx();
@@ -51,11 +75,11 @@ app.route('/', 'GET', function(req, res) {
     res('hello world');
 });
 
-app.get('/test',  function(req, res) {
+app.get('/test', function(req, res) {
     res('this is the test response with get method');
 });
 
-app.post('/',  function(req, res) {
+app.post('/', function(req, res) {
     res('this is the post response');
 });
 
