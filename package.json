@@ -1,13 +1,13 @@
 {
-  "name": "nodehttpserver",
-  "version": "1.0.0",
-  "description": "",
+  "name": "jetx",
+  "version": "0.1.0",
+  "description": "just a tiny http server inpired by express",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Erdiansyah <erdivartanovich@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "body": "^5.1.0"
