@@ -19,7 +19,7 @@ Make sure you have NodeJS (latest version is recommended) installed in your loca
 If you get this source from zip version or direcly clone from github repository, you can just run the example app with this command:
 
 ```
-    $ node example.js
+    $ npm start
 ```
 
 ### Install into your own NodeJS project Using NPM
