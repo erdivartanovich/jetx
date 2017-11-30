@@ -75,10 +75,9 @@ now run :
     node index.js
 ```
 
+<hr> 
 
-<hr>
 the full source can be cloned from [here](https://github.com/erdivartanovich/jetx)
 
 @erdivartanovich
-<hr>
 
