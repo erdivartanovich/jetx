@@ -4,9 +4,7 @@ just a tiny http server inspired by express
 
 ## Motivation
 
-Do you ever use express.js? well, it is the most popular NodeJs framework to build web service.
-This project is just a way to show how we can build a library like that, while also demonstrate how NodeJS work.
-It consist of only routing system and middleware, nothing more. The routing part is run on top of my own simple eventemitter container, and it just a single-segment url pattern matching using array filtering, well that is bad, for demostration purpose, i don't want to make it complicated. NodeJS it self has already provide better eventemitter package, but i just want to show, how the concept work.
+Do you ever use express.js? well, it is the most popular NodeJs framework to build web service. This project is just a way to show how we can build a library like that, while also demonstrating how NodeJS work. It consists of a routing system and middleware only, nothing more. The routing part is run on top of my own simple EventEmitter container, and it just a single-segment URL pattern matching using array filtering, well that is bad, for demonstration purpose, I don't want to make it complicated. NodeJS itself has already provided the better EventEmitter package, but I just want to show, how the concept works.
 
 ## Features
 
@@ -69,4 +67,10 @@ now run :
     node index.js
 ```
 
+
+<hr>
+the full surce can be clone from [here](https://github.com/erdivartanovich/jetx)
+
+@erdivartanovich
+<hr>
 
