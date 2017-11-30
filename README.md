@@ -12,19 +12,27 @@ Do you ever use express.js? well, it is the most popular NodeJs framework to bui
 - Middleware
 - Built in 404 error response
 
-## Installation
+## Install/ How to use
 
-make sure you have NodeJS (latest version is recommended) installed in your local
+Make sure you have NodeJS (latest version is recommended) installed in your local.
+
+If you get this source from zip version or direcly clone from github repository, you can just run the example app with this command:
+
+```
+    $ node example.js
+```
+
+### Install into your own NodeJS project Using NPM
 
 ```sh
     $ npm install jetx
 ```
 
-## Example/ how to use
+### Example/ how to use
 
 - create a file for example: index.js
 
-write these codes in the file:
+- write these codes in the file:
 
 ```js
     const jetx = require('./index');
