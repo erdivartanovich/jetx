@@ -1,6 +1,6 @@
 {
   "name": "jetx",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "just a tiny http server inspired by express",
   "main": "index.js",
   "scripts": {
