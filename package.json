@@ -1,12 +1,12 @@
 {
   "name": "jetx",
-  "version": "0.2.0",
-  "description": "just a tiny http server inpired by express",
+  "version": "0.2.1",
+  "description": "just a tiny http server inspired by express",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node example.js"
   },
-  "keywords": [],
+  "keywords": ["routing", "middleware", "evenemitter"],
   "author": "Erdiansyah <erdivartanovich@gmail.com>",
   "license": "ISC",
   "dependencies": {
