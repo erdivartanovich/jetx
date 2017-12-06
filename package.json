@@ -6,6 +6,11 @@
   "scripts": {
     "start": "node example.js"
   },
+  "homepage": "https://github.com/erdivartanovich/jetx",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/erdivartanovich/jetx.git"
+  },
   "keywords": [
     "routing",
     "middleware",
