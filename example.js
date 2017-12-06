@@ -14,6 +14,15 @@ app.get('/', function(req, res) {
 app.get('/test', function(req, res) {
     const result = {
         id: 1,
+        name: "test index",
+        xxx: "xxxxx"
+    }
+    res.json(result);
+});
+
+app.get('/test/:id', function(req, res) {
+    const result = {
+        id: req.input,
         name: "erdi",
         xxx: "xxxxx"
     }
@@ -21,7 +30,10 @@ app.get('/test', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-    res.send('this is the post response');
+    res.json({
+        message: 'this is the POST response',
+        body: req.body
+    })
 });
 
 // using middleware

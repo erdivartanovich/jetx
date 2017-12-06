@@ -1,15 +1,20 @@
 {
   "name": "jetx",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "just a tiny http server inspired by express",
   "main": "index.js",
   "scripts": {
     "start": "node example.js"
   },
-  "keywords": ["routing", "middleware", "evenemitter"],
+  "keywords": [
+    "routing",
+    "middleware",
+    "event-emitter"
+  ],
   "author": "Erdiansyah <erdivartanovich@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "body": "^5.1.0"
+    "body": "^5.1.0",
+    "url-pattern": "^1.0.3"
   }
 }
